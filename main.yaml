@@ -1,0 +1,42 @@
+database:
+        host:      db01a
+        user:      acano
+        password:  Ant23011
+        database:  easypaym_epg
+
+
+
+#rac: 
+#    nodes: [drlxteddb01,drlxteddb02]
+#    services:
+#        - diskgroup_bbdd:
+#             name:   ora.DISKGROUP_BBDD.dg
+#             target: ONLINE
+#             state:  ONLINE
+#             server: [drlxteddb01,drlxteddb02]
+#        - diskgroup_boot :
+#             name:   ora.DISKGROUP_BOOT.dg
+#             target: ONLINE
+#             state : ONLINE
+#             server: [drlxteddb01,drlxteddb02]     
+#        - diskgroup_fra :
+#             name:   ora.DISKGROUP_FRA.dg
+#             target: ONLINE
+#             state : ONLINE
+#             server: [drlxteddb01,drlxteddb02]  
+#        - diskgroup_tedial :
+#             name:   ora.DISKGROUP_TEDIAL.dg
+#             target: ONLINE
+#             state : ONLINE
+#             server: [drlxteddb01,drlxteddb02]   
+#        - local_listener :
+#             name:   ora.LISTENER.lsnr
+#             target: ONLINE
+#             state : ONLINE
+#             server: [drlxteddb01,drlxteddb02]   
+#        - scan1_listener :     
+#             name:   ora.LISTENER.lsnr
+#             target: ONLINE
+#             state : ONLINE
+#             server: [cluster_resource]   
+#
