@@ -1,0 +1,10 @@
+{
+    "name": "db01a",
+    "host": "db01a",
+    "protocol": "sftp",
+    "port": 22,
+    "username": "acano",
+    "remotePath": "/home/acano/dbstress-service",
+    "privateKeyPath": "/home/acano/.ssh/id_rsa",
+    "uploadOnSave": true
+}

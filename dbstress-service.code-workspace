@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"sftp.debug": true,
+		"sftp.downloadWhenOpenInRemoteExplorer": true,
+		"sftp.printDebugLog": true
+	}
+}
