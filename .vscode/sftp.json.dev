@@ -1,6 +1,6 @@
 {
-    "name": "db01a",
-    "host": "db01a",
+    "name": "db01-dev",
+    "host": "db01-dev",
     "protocol": "sftp",
     "port": 22,
     "username": "acano",

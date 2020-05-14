@@ -1,11 +1,11 @@
 database:
-        host:      db01a
-        user:      acano
-        password:  Ant23011
-        database:  easypaym_epg
-
-
-
+        MYSQL_HOST:  db01-dev
+        MYSQL_PORT:  3306
+        MYSQL_USER:  acano
+        MYSQL_PASS:  Ant23011
+        MYSQL_DB:    easypaym_epg
+        MYSQL_POOL_SIZE: 16
+        
 #rac: 
 #    nodes: [drlxteddb01,drlxteddb02]
 #    services:
