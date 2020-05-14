@@ -11,9 +11,29 @@ from flask import Flask
 from flask_restful import Api
 from flask_mysqlpool import MySQLPool
 
+# cache
+# https://flask-caching.readthedocs.io/en/latest/
+# http://brunorocha.org/python/flask/using-flask-cache.html
+# Example
+#from flask import current_app
+#def some_function():
+#    cached = current_app.cache.get('a_key')
+#    if cached:
+#        return cached
+#    result = do_some_stuff()
+#    current_app.cache.set('a_key', result, timeout=300)
+#    return result
+from flask_caching import Cache
+from flask import current_app as app
+
+
 # localpackages
-from epg_utils.configuration import configuration
+from epg_utils.configuration import configuration,load_cache
 from epg_api.transactions    import transactions
+
+
+
+
 
 pathname = os.path.abspath(os.path.dirname(sys.argv[0]))
 ACTIVATE_SCRIPT = pathname + '/venv/bin/activate_this.py'
@@ -25,6 +45,10 @@ cfg = configuration()
 # config flask aplication
 app = Flask(__name__)
 
+# init cache
+app.config['CACHE_TYPE'] = 'filesystem'
+app.config['CACHE_DIR'] = '/tmp/cache'
+#app.config['CACHE_TIMEOUT'] = 300
 
 # db
 dbcfg = cfg.get('database')
@@ -46,7 +70,6 @@ formatter = logging.Formatter('[%(asctime)s] - [%(thread)d - %(threadName)s] - [
 handler = RotatingFileHandler(LOG_FILENAME, maxBytes=10000000, backupCount=5)
 handler.setFormatter(formatter)
 app.logger.addHandler(handler)
-
 # examples
 # app.logger.info('msg') 
 # app.logger.debug('msg') 
@@ -56,15 +79,20 @@ app.logger.addHandler(handler)
 
 
 # init
-db  = MySQLPool(app)
-api = Api(app)
+db    =   MySQLPool(app)
+api   =   Api(app)
+appcache =   Cache(app)
+
+cache_transactions = load_cache()
+appcache.set('cache_transactions', cache_transactions)
+
 
 if __name__ == "__main__":
    
    print("http://192.168.52.52:3333/dbstress/api/v1.0/transactions")
    api.add_resource(transactions, '/dbstress/api/v1.0/transactions', endpoint = 'dbstress')
    app.logger.debug('INICIANDO ....') 
-   app.run(host='192.168.52.52', port='3333',debug=True)   
+   app.run(host='192.168.52.52', port='3333')   
    
 
    

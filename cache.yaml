@@ -1,0 +1,12 @@
+objeto1:
+        MYSQL_HOST:  db01-dev
+        MYSQL_PORT:  3306
+        MYSQL_USER:  acano
+        MYSQL_PASS:  Ant23011
+        MYSQL_DB:    easypaym_epgXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        MYSQL_POOL_SIZE: 16
+objecto2:
+        LOGFILE: /tmp/dbstress-service.log
+        LEVEL:   DEBUG
+
+ 

@@ -23,6 +23,8 @@ pip install pyyaml
 #pip install mysql-python
 #pip install flask_mysqldb
 pip install flask_mysqlpool
+pip install flask_caching
 pip list
+
 deactivate
 #eof
