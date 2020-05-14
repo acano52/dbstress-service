@@ -15,6 +15,7 @@ class transactions(Resource):
                    conn = db.connection.get_connection()  # get connection from pool
                    cursor = conn.cursor(dictionary=True)
                    cursor.execute("select host,user from mysql.user")
+                  
                    result = cursor.fetchall()
                    conn.close()  # return connection to pool
                 except mysql.connector.Error as err:

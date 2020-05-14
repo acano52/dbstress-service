@@ -2,6 +2,10 @@
 import os
 import sys
 
+# logs
+import logging
+from logging.handlers import RotatingFileHandler
+
 # pip packages
 from flask import Flask
 from flask_restful import Api
@@ -11,10 +15,19 @@ from flask_mysqlpool import MySQLPool
 from epg_utils.configuration import configuration
 from epg_api.transactions    import transactions
 
+pathname = os.path.abspath(os.path.dirname(sys.argv[0]))
+ACTIVATE_SCRIPT = pathname + '/venv/bin/activate_this.py'
+execfile(ACTIVATE_SCRIPT, dict(__file__=ACTIVATE_SCRIPT))
 
+# Read configuration
+cfg = configuration()
+
+# config flask aplication
 app = Flask(__name__)
 
-dbcfg = configuration().get('database')
+
+# db
+dbcfg = cfg.get('database')
 app.config['MYSQL_HOST']       = dbcfg.get('MYSQL_HOST')
 app.config['MYSQL_PORT']       = dbcfg.get('MYSQL_PORT')
 app.config['MYSQL_USER']       = dbcfg.get('MYSQL_USER')
@@ -24,18 +37,35 @@ app.config['MYSQL_POOL_NAME']  = 'dbstress_pool'
 app.config['MYSQL_POOL_SIZE']  = dbcfg.get('MYSQL_POOL_SIZE')
 app.config['MYSQL_AUTOCOMMIT'] = True
 
+# log
+logcfg = cfg.get('logging')
+LOG_FILENAME=logcfg.get('LOGFILE')
+LEVEL=logcfg.get('LEVEL').upper()
+logging.basicConfig(level=eval('logging.' + LEVEL))
+formatter = logging.Formatter('[%(asctime)s] - [%(thread)d - %(threadName)s] - [%(levelname)s] - %(message)s')
+handler = RotatingFileHandler(LOG_FILENAME, maxBytes=10000000, backupCount=5)
+handler.setFormatter(formatter)
+app.logger.addHandler(handler)
+
+# examples
+# app.logger.info('msg') 
+# app.logger.debug('msg') 
+# app.logger.error('msg') 
+# app.logger.warning('msg') 
+# app.logger.critical('msg') 
+
+
+# init
 db  = MySQLPool(app)
 api = Api(app)
 
-pathname = os.path.abspath(os.path.dirname(sys.argv[0]))
-ACTIVATE_SCRIPT = pathname + '/venv/bin/activate_this.py'
-execfile(ACTIVATE_SCRIPT, dict(__file__=ACTIVATE_SCRIPT))
-
-
 if __name__ == "__main__":
+   
    print("http://192.168.52.52:3333/dbstress/api/v1.0/transactions")
    api.add_resource(transactions, '/dbstress/api/v1.0/transactions', endpoint = 'dbstress')
-   app.run(host='192.168.52.52', port='3333')   
+   app.logger.debug('INICIANDO ....') 
+   app.run(host='192.168.52.52', port='3333',debug=True)   
+   
 
    
    

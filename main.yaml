@@ -5,6 +5,10 @@ database:
         MYSQL_PASS:  Ant23011
         MYSQL_DB:    easypaym_epg
         MYSQL_POOL_SIZE: 16
+logging:
+        LOGFILE: /tmp/dbstress-service.log
+        LEVEL:   DEBUG
+
         
 #rac: 
 #    nodes: [drlxteddb01,drlxteddb02]
