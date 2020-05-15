@@ -28,7 +28,7 @@ from flask import current_app as app
 
 
 # localpackages
-from epg_utils.configuration import configuration,load_cache
+from epg_utils.configuration import *
 from epg_api.transactions    import transactions
 
 
@@ -48,7 +48,9 @@ app = Flask(__name__)
 # init cache
 app.config['CACHE_TYPE'] = 'filesystem'
 app.config['CACHE_DIR'] = '/tmp/cache'
-#app.config['CACHE_TIMEOUT'] = 300
+#app.config['CACHE_DEFAULT_TIMEOUT'] = 922337203685477580
+app.config['CACHE_DEFAULT_TIMEOUT'] = 5
+#app.config['CACHE_THRESHOLD'] = 922337203685477580
 
 # db
 dbcfg = cfg.get('database')
@@ -79,19 +81,23 @@ app.logger.addHandler(handler)
 
 
 # init
-db    =   MySQLPool(app)
-api   =   Api(app)
+db       =   MySQLPool(app)
+api      =   Api(app)
 appcache =   Cache(app)
 
-cache_transactions = load_cache()
-appcache.set('cache_transactions', cache_transactions)
+
+#with app.app_context():
+     #cache_merchants    = load_cache_merchants()
+     #cache_transactions = load_cache()
+     
+     #appcache.set('cache_transactions', load_cache())
+     #appcache.set('cache_merchants', load_cache_merchants())
 
 
 if __name__ == "__main__":
    
    print("http://192.168.52.52:3333/dbstress/api/v1.0/transactions")
    api.add_resource(transactions, '/dbstress/api/v1.0/transactions', endpoint = 'dbstress')
-   app.logger.debug('INICIANDO ....') 
    app.run(host='192.168.52.52', port='3333')   
    
 

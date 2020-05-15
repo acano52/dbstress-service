@@ -5,14 +5,14 @@ from subprocess      import PIPE
 from subprocess      import Popen
 from subprocess      import STDOUT
 
+from flask_mysqlpool import MySQLPool
+from flask_caching import Cache
+from flask import current_app as app
+
 
 def configuration():
 
     with open("main.yaml", 'r') as ymlfile:
         cfg = yaml.load(ymlfile , Loader=yaml.FullLoader)
     return cfg
-
-def load_cache():
-    with open("cache.yaml", 'r') as ymlfile:
-        cache = yaml.load(ymlfile , Loader=yaml.FullLoader)
-    return cache
+    
