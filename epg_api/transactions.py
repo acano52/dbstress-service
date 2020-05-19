@@ -28,14 +28,11 @@ class transactions(Resource):
                # except mysql.connector.Error as err:
                #    print(format(err))
                #    conn.close()
-               #    abort(500)
+               #    abort(500) abort(500)
                
                with app.app_context():
-                    cache_general   = get_cache_general()
-                    cache_merchants = get_cache_merchants()
+                    cache_general    = get_cache_general()
+                    cache_merchants  = get_cache_merchants()
                     txid=insert_t_transaction()
-               
-               #app.logger.debug(cache_merchants)
-
-               to_json = [cache_general]
+               to_json = [cache_merchants]
                return jsonify(to_json) 

@@ -4,43 +4,7 @@ database:
         MYSQL_USER:  acano
         MYSQL_PASS:  Ant23011
         MYSQL_DB:    easypaym_epg
-        MYSQL_POOL_SIZE: 16
+        MYSQL_POOL_SIZE: 32
 logging:
         LOGFILE: /tmp/dbstress-service.log
         LEVEL:   DEBUG
-
-        
-#rac: 
-#    nodes: [drlxteddb01,drlxteddb02]
-#    services:
-#        - diskgroup_bbdd:
-#             name:   ora.DISKGROUP_BBDD.dg
-#             target: ONLINE
-#             state:  ONLINE
-#             server: [drlxteddb01,drlxteddb02]
-#        - diskgroup_boot :
-#             name:   ora.DISKGROUP_BOOT.dg
-#             target: ONLINE
-#             state : ONLINE
-#             server: [drlxteddb01,drlxteddb02]     
-#        - diskgroup_fra :
-#             name:   ora.DISKGROUP_FRA.dg
-#             target: ONLINE
-#             state : ONLINE
-#             server: [drlxteddb01,drlxteddb02]  
-#        - diskgroup_tedial :
-#             name:   ora.DISKGROUP_TEDIAL.dg
-#             target: ONLINE
-#             state : ONLINE
-#             server: [drlxteddb01,drlxteddb02]   
-#        - local_listener :
-#             name:   ora.LISTENER.lsnr
-#             target: ONLINE
-#             state : ONLINE
-#             server: [drlxteddb01,drlxteddb02]   
-#        - scan1_listener :     
-#             name:   ora.LISTENER.lsnr
-#             target: ONLINE
-#             state : ONLINE
-#             server: [cluster_resource]   
-#

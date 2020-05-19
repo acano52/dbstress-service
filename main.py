@@ -32,9 +32,6 @@ from epg_utils.configuration import *
 from epg_api.transactions    import transactions
 
 
-
-
-
 pathname = os.path.abspath(os.path.dirname(sys.argv[0]))
 ACTIVATE_SCRIPT = pathname + '/venv/bin/activate_this.py'
 execfile(ACTIVATE_SCRIPT, dict(__file__=ACTIVATE_SCRIPT))
@@ -49,7 +46,7 @@ app = Flask(__name__)
 app.config['CACHE_TYPE'] = 'filesystem'
 app.config['CACHE_DIR'] = '/tmp/cache'
 #app.config['CACHE_DEFAULT_TIMEOUT'] = 922337203685477580
-app.config['CACHE_DEFAULT_TIMEOUT'] = 5
+app.config['CACHE_DEFAULT_TIMEOUT'] = 300
 #app.config['CACHE_THRESHOLD'] = 922337203685477580
 
 # db
@@ -68,7 +65,10 @@ logcfg = cfg.get('logging')
 LOG_FILENAME=logcfg.get('LOGFILE')
 LEVEL=logcfg.get('LEVEL').upper()
 logging.basicConfig(level=eval('logging.' + LEVEL))
-formatter = logging.Formatter('[%(asctime)s] - [%(thread)d - %(threadName)s] - [%(levelname)s] - [%(filename)s:%(lineno)s - %(funcName)20s() ] - %(message)s')
+if LEVEL.upper is 'DEBUG':
+   formatter = logging.Formatter('[%(asctime)s] - [%(thread)d - %(threadName)s] - [%(levelname)s] - [%(filename)s:%(lineno)s - %(funcName)20s() ] - %(message)s') 
+else:
+   formatter = logging.Formatter('[%(asctime)s] - [%(thread)d - %(threadName)s] - [%(levelname)s] - %(message)s')      
 handler = RotatingFileHandler(LOG_FILENAME, maxBytes=10000000, backupCount=5)
 handler.setFormatter(formatter)
 app.logger.addHandler(handler)
@@ -84,15 +84,6 @@ app.logger.addHandler(handler)
 db       =   MySQLPool(app)
 api      =   Api(app)
 appcache =   Cache(app)
-
-
-#with app.app_context():
-     #cache_merchants    = load_cache_merchants()
-     #cache_transactions = load_cache()
-     
-     #appcache.set('cache_transactions', load_cache())
-     #appcache.set('cache_merchants', load_cache_merchants())
-
 
 if __name__ == "__main__":
    

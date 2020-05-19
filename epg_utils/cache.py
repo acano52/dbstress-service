@@ -1,4 +1,5 @@
 import mysql.connector
+from mysql.connector.errors import Error
 import ConfigParser
 import yaml
 from subprocess      import PIPE
@@ -8,6 +9,8 @@ from subprocess      import STDOUT
 from flask_mysqlpool import MySQLPool
 from flask_caching import Cache
 from flask import current_app as app
+import random
+from datetime import datetime
 
 
 def get_cache_general():
@@ -23,23 +26,100 @@ def get_cache_general():
 def get_cache_merchants():
     
     appcache=Cache(app)
-    c = appcache.get('cache_merchants')
-    if c is None:
+    cache_merchants = appcache.get('cache_merchants')
+    if cache_merchants is None:
        db = MySQLPool(app)
        app.logger.info("Loading cache_merchants ...")
        try:
           conn = db.connection.get_connection()  # get connection from pool
           cursor = conn.cursor(dictionary=True)
-          sql = "select * from e_merchants limit 20"
-          app.logger.debug(sql)
+          sql = "SELECT a.* "\
+                " FROM  e_merchants a"\
+                " WHERE EXISTS (SELECT * "\
+                "                 FROM e_customer b "\
+                "                WHERE b.active=true AND"\
+                "                      b.merchant_id = a.id)"\
+                " LIMIT 50"
+          
           cursor.execute(sql)
+          cache_merchants=dict()
+          for row in cursor:
+              merchant_id=row["id"]
+              d=dict(row)
+              l_customers=get_e_customer(merchant_id)
+              d['e_customer']=l_customers
+              cache_merchants[merchant_id]=d    
+              app.logger.debug("Merchant_ID: %s .... CACHED with %s e_customer" , merchant_id,len(l_customers))
+          appcache.set('cache_merchants',cache_merchants)          
+
+       except Error as e:
+              app.logger.error(format(e))
+       finally:
+              cursor.close()
+              conn.close()
+          
+    return cache_merchants
+    
+
+def get_e_customer(merchant_id):
+       
+       db = MySQLPool(app)
+       try:
+          conn = db.connection.get_connection()  # get connection from pool
+          cursor = conn.cursor(dictionary=True)
+          sql = " SELECT * "\
+                " FROM e_customer "\
+                " WHERE merchant_id = %s "\
+                " LIMIT 10"   
+              
+          data=(merchant_id,)                
+          cursor.execute(sql,data)  
           result = cursor.fetchall()
-          conn.close()  
           c =  [dict(row) for row in result]
-          appcache.set('cache_merchants',c)      
+          return c
        except mysql.connector.Error as err:
           app.logger.error(format(err))
+          app.logger.debug(cursor.statement)
+       finally:
+          cursor.close()
           conn.close()
-    return c
-    
-    
+  
+def get_cache_currency_country():
+
+     currency_country = [["EUR","GB"],
+                         ["CNY","CN"],
+                         ["EUR","AT"],
+                         ["USD","CL"],
+                         ["USD","US"],
+                         ["USD","CO"],
+                         ["USD","KZ"],
+                         ["USD","MX"],
+                         ["RUB","RU"],
+                         ["EUR","IT"],
+                         ["CAD","CA"],
+                         ["USD","UA"],
+                         ["EUR","DE"],
+                         ["EUR","FR"],
+                         ["USD","RU"],
+                         ["GBP","GB"],
+                         ["EUR","ES"]]
+                        
+     return currency_country
+
+def get_random_currency_country():
+
+     c=get_cache_currency_country()
+     k=random.choice(c)
+     return k
+
+
+def get_random_date():
+
+    d=datetime.today().strftime('%Y%m%d')
+    return d
+
+def get_random_time():
+
+    d=datetime.today().strftime('%H%M%S')
+    dd="1" + d
+    return dd
