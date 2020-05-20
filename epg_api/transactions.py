@@ -13,23 +13,6 @@ class transactions(Resource):
 
        
            def get(self):
-               #db = MySQLPool(app)
-               # appcache=Cache(app)
-               # cache_transactions =  appcache.get('cache_transactions')
-               # app.logger.info(cache_transactions)
-               # app.logger.debug( appcache.get('cache_merchants'))
-               # try:
-               #    conn = db.connection.get_connection()  # get connection from pool
-               #    cursor = conn.cursor(dictionary=True)
-               #    cursor.execute("select * from acano")
-               #   
-               #    result = cursor.fetchall()
-               #    conn.close()  # return connection to pool
-               # except mysql.connector.Error as err:
-               #    print(format(err))
-               #    conn.close()
-               #    abort(500) abort(500)
-               
                with app.app_context():
                     cache_general    = get_cache_general()
                     cache_merchants  = get_cache_merchants()
