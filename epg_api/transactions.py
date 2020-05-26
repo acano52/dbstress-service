@@ -7,6 +7,11 @@ from flask import current_app as app
 from epg_utils.configuration import *
 from epg_utils.cache import *
 from epg_db.t_transactions import *
+from epg_db.t_optional_parameters import *
+from epg_db.t_optional_transactions_params import *
+from epg_db.t_transaction_device import *
+from epg_db.t_customer_request import *
+from epg_db.t_cart_transactions import *
 from epg_db.e_customer     import *
 
 
@@ -47,13 +52,39 @@ class transactions(Resource):
 
                     #15 
                     v_e_customer_tnx_summary=get_e_customer_tnx_summary(v_merchant_id,v_merchant_customer_id)
-                    ret=v_e_customer_tnx_summary
-                    
-                    #99
-                    #txid=insert_t_transaction(merchant,e_customer)
                     
                     
+                    #16
+                    #TODO pendiente account_details_id para que enganche con cus_account_card
+                    txnid=insert_t_transaction(merchant,e_customer)
+
+                    #18
+                    insert_t_optional_parameters(v_merchant_id,txnid)
+
+                    #19
+                    insert_t_optional_transactions_params(txnid)
+                    
+                    #20
+                    ret=select_t_transaction_device(txnid)
+                    insert_t_transaction_device(txnid)
+
+                    #21
+                    insert_t_customer_request(txnid)
+
+                    #22
+                    insert_t_cart_transactions(txnid)
+
+                    
+                    #23
+                    x=get_e_customerbyID(e_customer.get('id'))
+
+                    #29
+                    x=get_e_customerby_payfrex(e_customer.get('payfrex_customer_id'))
+
+                    #30
+                    x=select_t_optional_transactions_params(txnid)
+
                     #to_json = [cache_merchants]
-                    to_json = ret
+                    to_json = x
                               
                return jsonify(str(to_json)) 

@@ -32,6 +32,43 @@ def get_e_customer(merchant_id,merchant_customer_id):
           cursor.close()
           conn.close()
 
+def get_e_customerbyID(id):
+       
+       db = MySQLPool(app)
+       try:
+          conn = db.connection.get_connection()
+          cursor = conn.cursor(dictionary=True)
+          sql="SELECT * FROM e_customer WHERE id = %s ORDER BY date_created desc LIMIT 1"
+          data=(id,)                
+          cursor.execute(sql,data)  
+          result = cursor.fetchall()
+          c =  [dict(row) for row in result]
+          return c
+       except mysql.connector.Error as err:
+          app.logger.error(format(err))
+          app.logger.debug(cursor.statement)
+       finally:
+          cursor.close()
+          conn.close()
+
+def get_e_customerby_payfrex(payfrex_customer_id):
+       db = MySQLPool(app)
+       try:
+          conn = db.connection.get_connection()
+          cursor = conn.cursor(dictionary=True)
+          sql="SELECT * FROM e_customer WHERE payfrex_customer_id = %s AND active = 1 ORDER BY date_created desc LIMIT 1"
+          data=(payfrex_customer_id,)                
+          cursor.execute(sql,data)  
+          result = cursor.fetchall()
+          c =  [dict(row) for row in result]
+          return c
+       except mysql.connector.Error as err:
+          app.logger.error(format(err))
+          app.logger.debug(cursor.statement)
+       finally:
+          cursor.close()
+          conn.close()
+
 
 #12 
 def get_e_customer_success_transactions(merchant_id,merchant_customer_id):
