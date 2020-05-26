@@ -6,7 +6,7 @@ from epg_utils.cache import *
 import random
 
 
-def insert_t_transaction():
+def insert_t_transaction(merchant , customer):
         
        txid = None
        sql=   "INSERT into t_transactions " \
@@ -52,16 +52,13 @@ def insert_t_transaction():
               "VALUES (%s, NOW(), NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s )"
 
 
-       #get random merchant_id
-       cache_merchants  = get_cache_merchants()
-       k = random.choice(list(cache_merchants))
-       m =cache_merchants[k]
+       m =merchant
        v_merchant_id  = m.get('id')
        v_status_url   = m.get('default_status_url')
        
        #get random e_customer_id from the selected merchant_id
        l_e_customer   = m.get('e_customer') 
-       k=random.choice(l_e_customer)
+       k=customer
        v_e_customer_id=k.get('id')
        v_customer_id=k.get('payfrex_customer_id')
        v_ip=k.get('ip')

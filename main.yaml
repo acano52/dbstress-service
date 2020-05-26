@@ -5,6 +5,14 @@ database:
         MYSQL_PASS:  Ant23011
         MYSQL_DB:    easypaym_epg
         MYSQL_POOL_SIZE: 32
+#database:
+#        MYSQL_HOST:  192.168.52.1
+#        MYSQL_PORT:  20007
+#        MYSQL_USER:  acano
+#        MYSQL_PASS:  Ant23011
+#        MYSQL_DB:    easypaym_epg
+#        MYSQL_POOL_SIZE: 4
+
 logging:
         LOGFILE: /tmp/dbstress-service.log
         LEVEL:   DEBUG

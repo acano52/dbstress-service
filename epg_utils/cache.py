@@ -36,12 +36,12 @@ def get_cache_merchants():
           cursor = conn.cursor(dictionary=True)
           sql = "SELECT a.* "\
                 " FROM  e_merchants a"\
-                " WHERE EXISTS (SELECT * "\
+                " WHERE id=10162 AND EXISTS (SELECT * "\
                 "                 FROM e_customer b "\
                 "                WHERE b.active=true AND"\
-                "                      b.merchant_id = a.id)"\
-                " LIMIT 50"
-          
+                "                      b.merchant_id = a.id and merchant_customer_id=5538217 )"\
+                " LIMIT 1"
+#Production "                      b.merchant_id = a.id and merchant_customer_id=532779 )"\
           cursor.execute(sql)
           cache_merchants=dict()
           for row in cursor:
@@ -85,8 +85,9 @@ def get_e_customer(merchant_id):
           cursor = conn.cursor(dictionary=True)
           sql = " SELECT * "\
                 " FROM e_customer "\
-                " WHERE merchant_id = %s "\
-                " LIMIT 10"   
+                " WHERE merchant_id = %s and MERCHANT_CUSTOMER_ID=5538217"\
+                " LIMIT 1"   
+#production " WHERE merchant_id = %s and MERCHANT_CUSTOMER_ID=532779"\                
               
           data=(merchant_id,)                
           cursor.execute(sql,data)  
