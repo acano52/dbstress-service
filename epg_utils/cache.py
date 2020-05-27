@@ -24,6 +24,7 @@ def get_cache_general():
             appcache.set('cache_general',c) 
     return c
 
+
 def get_cache_merchants():
     
     appcache=Cache(app)
@@ -193,3 +194,22 @@ def get_random_stringlen(string_length=10):
     random = random.upper()         # Make all characters uppercase.
     random = random.replace("-","") # Remove the UUID '-'.
     return random[0:string_length]  # Return the random string.
+
+
+def get_random_4kblob():
+    appcache=Cache(app)
+    c = appcache.get('blob4k')
+    if c is None:
+       with open("random4k.blob", 'r') as f:
+            c = f.readlines()
+            appcache.set('blob4k',c) 
+    return c    
+
+def get_random_15kblob():
+    appcache=Cache(app)
+    c = appcache.get('blob15k')
+    if c is None:
+       with open("random15k.blob", 'r') as f:
+            c = f.readlines()
+            appcache.set('blob15k',c) 
+    return c    
