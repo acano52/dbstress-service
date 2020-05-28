@@ -13,6 +13,8 @@ from epg_db.t_transaction_device import *
 from epg_db.t_customer_request import *
 from epg_db.t_cart_transactions import *
 from epg_db.t_fraud_attributes import *
+from epg_db.t_transaction_request import *
+from epg_db.t_transaction_payment_details import *
 from epg_db.e_customer     import *
 
 
@@ -118,8 +120,50 @@ class transactions(Resource):
                     appcache.set('cache_txn',dic_txn)
                     update_t_transaction()
 
-                    a=get_random_15kblob()
+                    #48
+                    insert_t_transaction_request(dic_txn['id'])
+
+                    #50
+                    insert_t_transaction_payment_details(1)
+                    insert_t_transaction_payment_details(2)
+                    insert_t_transaction_payment_details(3)
+                    insert_t_transaction_payment_details(4)
+
+                    #54
+                    appcache=Cache(app)
+                    dic_txn = appcache.get('cache_txn')
+                    dic_txn['dim_date_modified_id']           = get_random_date()
+                    dic_txn['dim_time_modified_id']           = get_random_time() 
+                    dic_txn['dim_merchant_date_modified_id']  = get_random_date() 
+                    dic_txn['dim_merchant_time_modified_id']  = get_random_time() 
+                    dic_txn['threed_enrolment']  = True
+                    appcache.set('cache_txn',dic_txn)
+                    update_t_transaction()
+                   
+                    #56
+                    appcache=Cache(app)
+                    dic_txn = appcache.get('cache_txn')
+                    dic_txn['dim_date_modified_id']           = get_random_date()
+                    dic_txn['dim_time_modified_id']           = get_random_time() 
+                    dic_txn['dim_merchant_date_modified_id']  = get_random_date() 
+                    dic_txn['dim_merchant_time_modified_id']  = get_random_time() 
+                    dic_txn['message']= " Transaction is processing" #space to enforce update in #56
+                    appcache.set('cache_txn',dic_txn)
+                    update_t_transaction()
+                    
+                    #58
+                    appcache=Cache(app)
+                    dic_txn = appcache.get('cache_txn')
+                    dic_txn['dim_date_modified_id']           = get_random_date()
+                    dic_txn['dim_time_modified_id']           = get_random_time() 
+                    dic_txn['dim_merchant_date_modified_id']  = get_random_date() 
+                    dic_txn['dim_merchant_time_modified_id']  = get_random_time() 
+                    dic_txn['message']= "Transaction is processing"
+                    appcache.set('cache_txn',dic_txn)
+                    update_t_transaction()
+
+
                     #to_json = [cache_merchants]
-                    to_json = a
+                    to_json = dic_txn['id']
                               
                return jsonify(str(to_json)) 

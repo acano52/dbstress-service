@@ -48,8 +48,9 @@ def insert_t_transaction(merchant , customer):
               "dim_merchant_date_modified_id,"\
               "dim_merchant_time_created_id,"\
               "dim_merchant_time_modified_id,"\
-              "account_details_id) "\
-              "VALUES (%s, NOW(), NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s )"
+              "account_details_id,"\
+              "threed_enrolment)"\
+              "VALUES (%s, NOW(), NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s, %s )"
 
 
        m =merchant
@@ -80,7 +81,7 @@ def insert_t_transaction(merchant , customer):
        app.logger.debug("ramdom() e_customer_id: %s " , v_e_customer_id)
        app.logger.debug("ramdom() paysol_id: %s "     , v_paysol_id)
        
-
+       dic_txn=dict()
        dic_txn={
        'id'                              : None,
        'paysol_id'                       : v_paysol_id,
@@ -118,7 +119,8 @@ def insert_t_transaction(merchant , customer):
        'dim_merchant_date_modified_id'   : get_random_date(),
        'dim_merchant_time_created_id'    : get_random_time(),
        'dim_merchant_time_modified_id'   : get_random_time(),
-       'account_details_id'              : 525252525252
+       'account_details_id'              : 525252525252,
+       'threed_enrolment'                : None
        }
               
        txn_data=(dic_txn['id'],
@@ -157,7 +159,8 @@ def insert_t_transaction(merchant , customer):
                 dic_txn['dim_merchant_date_modified_id'],
                 dic_txn['dim_merchant_time_created_id'],
                 dic_txn['dim_merchant_time_modified_id'],
-                dic_txn['account_details_id'])
+                dic_txn['account_details_id'],
+                dic_txn['threed_enrolment'])
 
        db = MySQLPool(app)
        try:
@@ -166,8 +169,8 @@ def insert_t_transaction(merchant , customer):
           cursor.execute(sql, txn_data)  
           dic_txn['id']=cursor.lastrowid
           conn.commit
-          appcache=Cache(app)
           app.logger.debug("TXN: %s .... CACHED" ,  dic_txn['id'])
+          appcache=Cache(app)
           appcache.set('cache_txn',dic_txn)          
        except mysql.connector.Error as err:
           app.logger.error(format(sql))
@@ -225,7 +228,8 @@ def update_t_transaction():
           "         dim_merchant_date_modified_id=%s,             "\
           "         dim_merchant_time_created_id=%s,              "\
           "         dim_merchant_time_modified_id=%s,             "\
-          "         account_details_id=%s                         "\
+          "         account_details_id=%s,                        "\
+          "         threed_enrolment=%s                           "\
           "  WHERE id = %s"
 
 
@@ -269,6 +273,7 @@ def update_t_transaction():
                 dic_txn['dim_merchant_time_created_id'],
                 dic_txn['dim_merchant_time_modified_id'],
                 dic_txn['account_details_id'],
+                dic_txn['threed_enrolment'],
                 dic_txn['id'])
       
       db = MySQLPool(app)

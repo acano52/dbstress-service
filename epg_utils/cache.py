@@ -11,6 +11,7 @@ from flask_caching import Cache
 from flask import current_app as app
 import random
 import uuid
+import io
 from datetime import datetime
 
 
@@ -200,8 +201,8 @@ def get_random_4kblob():
     appcache=Cache(app)
     c = appcache.get('blob4k')
     if c is None:
-       with open("random4k.blob", 'r') as f:
-            c = f.readlines()
+       with io.open("random4k.blob", 'r',encoding="utf-8") as f:
+            c = f.read()
             appcache.set('blob4k',c) 
     return c    
 
@@ -209,7 +210,7 @@ def get_random_15kblob():
     appcache=Cache(app)
     c = appcache.get('blob15k')
     if c is None:
-       with open("random15k.blob", 'r') as f:
-            c = f.readlines()
+       with io.open("random15k.blob", 'r',encoding="utf-8") as f:
+            c = f.read()
             appcache.set('blob15k',c) 
     return c    
