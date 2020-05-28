@@ -7,10 +7,10 @@ import random
 import json
 
 
-def insert_t_transaction_payment_details(option):
+def insert_t_transaction_payment_details(txnid,option):
 
        appcache=Cache(app)
-       dic_txn = appcache.get('cache_txn') 
+       dic_txn = appcache.get(str(txnid)) 
 
        
 

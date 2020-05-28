@@ -28,7 +28,6 @@ def insert_t_optional_parameters(merchant_id , transaction_id):
          conn = db.connection.get_connection()
          cursor = conn.cursor()
          cursor.execute(sql, data)  
-         txid=cursor.lastrowid
          conn.commit
        except mysql.connector.Error as err:
          app.logger.error(format(sql))

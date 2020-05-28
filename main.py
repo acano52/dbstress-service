@@ -47,7 +47,7 @@ app.config['CACHE_TYPE'] = 'filesystem'
 app.config['CACHE_DIR'] = '/tmp/cache'
 #app.config['CACHE_DEFAULT_TIMEOUT'] = 922337203685477580
 app.config['CACHE_DEFAULT_TIMEOUT'] = 300
-#app.config['CACHE_THRESHOLD'] = 922337203685477580
+app.config['CACHE_THRESHOLD'] = 922337203685477580
 
 # db
 dbcfg = cfg.get('database')

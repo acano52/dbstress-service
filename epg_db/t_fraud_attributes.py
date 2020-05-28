@@ -7,11 +7,12 @@ from epg_utils.cache import *
 import random
 import json
 
-def insert_t_fraud_atributes(transaction_id):
+def insert_t_fraud_atributes(txnid):
 
 
+       appcache=Cache(app)
+       dic_txn = appcache.get(str(txnid)) 
 
-       txid = None
        s_json = { "cardBinCountry":"RU","cardBinCountryEqCountry":True,"ip":"94.25.172.140","countryIso2":"RU","type":"ECOM","cardBinCountryEqIpCountry":True }
        v_json = s_json
  
@@ -21,7 +22,7 @@ def insert_t_fraud_atributes(transaction_id):
             " attributes                       "\
             " ) VALUES ( %s , %s )             "
             
-       data=(transaction_id,json.dumps(v_json))
+       data=(dic_txn['id'],json.dumps(v_json))
        db = MySQLPool(app)
        try:
          conn = db.connection.get_connection()

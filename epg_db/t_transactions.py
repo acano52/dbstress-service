@@ -167,11 +167,14 @@ def insert_t_transaction(merchant , customer):
           conn = db.connection.get_connection()
           cursor = conn.cursor()
           cursor.execute(sql, txn_data)  
-          dic_txn['id']=cursor.lastrowid
           conn.commit
-          app.logger.debug("TXN: %s .... CACHED" ,  dic_txn['id'])
           appcache=Cache(app)
-          appcache.set('cache_txn',dic_txn)          
+          dic_txn['id']=cursor.lastrowid
+          #Cache Name for txn is de ID
+          appcache.set(str(dic_txn['id']),dic_txn)          
+          app.logger.debug("TXN: %s .... CACHED" ,  dic_txn['id'])
+          
+          
        except mysql.connector.Error as err:
           app.logger.error(format(sql))
           app.logger.error(txn_data)
@@ -181,13 +184,13 @@ def insert_t_transaction(merchant , customer):
           conn.close()
 
 
-       return dic_txn
+       return dic_txn['id']
 
 
 
 
 
-def update_t_transaction():
+def update_t_transaction(txnid):
 
 
 
@@ -235,7 +238,7 @@ def update_t_transaction():
 
       #Update txn cache before to update
       appcache=Cache(app)
-      dic_txn = appcache.get('cache_txn')
+      dic_txn = appcache.get(str(txnid))
 
       data=(    dic_txn['paysol_id'],
                 dic_txn['amount'],
