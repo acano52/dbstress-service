@@ -1,74 +1,114 @@
-DEBUG:main:ramdom() merchant_id  : 666 
-DEBUG:main:ramdom() v_payfrex_customer_id: 666123456 
-DEBUG:main:ramdom() merchant_id  : 666 
-DEBUG:main:ramdom() e_customer_id: 46642 
-DEBUG:main:ramdom() paysol_id: 200 
-DEBUG:main:TXN: 337 .... CACHED
-DEBUG:main:{'merchant_txn_id': '294DF', 'ip': u'195.244.210.120', 'workflow_name': None, 'paysol_id': 200, 'currency': 'USD', 'workflow_id': None, 'kyc_status': None, 'message': 'Transaction was initiated', 'workflow_step_id': None, 'id': 337, 'status_url': None, 'dim_date_created_id': '20200528', 'dim_ip_city_id': None, 'dim_merchant_time_created_id': '1061849', 'dim_time_modified_id': '1061849', 'customer_id': u'666123456', 'type': 'ECOM', 'dim_time_created_id': '1061849', 'kyc_message': None, 'description': 'Transfer to XXXXXXXXXXXX, id YYYYYYYYYY', 'status_id': 3, 'original_txn_id': None, 'dim_merchant_date_modified_id': '20200528', 'account_details_id': 525252525252, 'merchant_id': 666, 'dim_merchant_time_modified_id': '1061849', 'dim_merchant_date_created_id': '20200528', 'product_id': 6661, 'dim_ip_country_id': None, 'invoice_id': None, 'workflow_description': None, 'e_customer_id': 46642, 'amount': 55.66, 'country': 'KZ', 'operation_id': 2, 'dim_date_modified_id': '20200528', 'workflow_version': None}
-DEBUG:main:Rows updated : 1
-DEBUG:main:Rows updated : 1
-INFO:werkzeug:192.168.52.1 - - [28/May/2020 06:18:49] "GET /dbstress/api/v1.0/transactions HTTP/1.1" 200 -
-^C./run.sh: line 8: eof: command not found
-acano@db01-dev:~/dbstress-service$ ./run.sh 
-http://192.168.52.52:3333/dbstress/api/v1.0/transactions
- * Serving Flask app "main" (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: off
-INFO:werkzeug: * Running on http://192.168.52.52:3333/ (Press CTRL+C to quit)
-DEBUG:main:ramdom() merchant_id  : 1000 
-DEBUG:main:ramdom() v_payfrex_customer_id: 10002143tyhmnj 
-DEBUG:main:ramdom() merchant_id  : 1000 
-DEBUG:main:ramdom() e_customer_id: 578920 
-DEBUG:main:ramdom() paysol_id: 7600 
-DEBUG:main:TXN: 338 .... CACHED
-DEBUG:main:Rows updated : 1
-DEBUG:main:Rows updated : 1
-ERROR:main:Exception on /dbstress/api/v1.0/transactions [GET]
-Traceback (most recent call last):
-  File "/home/acano/dbstress-service/venv/local/lib/python2.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/acano/dbstress-service/venv/local/lib/python2.7/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/acano/dbstress-service/venv/local/lib/python2.7/site-packages/flask_restful/__init__.py", line 468, in wrapper
-    resp = resource(*args, **kwargs)
-  File "/home/acano/dbstress-service/venv/local/lib/python2.7/site-packages/flask/views.py", line 89, in view
-    return self.dispatch_request(*args, **kwargs)
-DEBUG:main:ramdom() merchant_id  : 666 
-DEBUG:main:ramdom() v_payfrex_customer_id: 666123456 
-DEBUG:main:ramdom() merchant_id  : 666 
-DEBUG:main:ramdom() e_customer_id: 46642 
-DEBUG:main:ramdom() paysol_id: 200 
-DEBUG:main:TXN: 337 .... CACHED
-DEBUG:main:{'merchant_txn_id': '294DF', 'ip': u'195.244.210.120', 'workflow_name': None, 'paysol_id': 200, 'currency': 'USD', 'workflow_id': None, 'kyc_status': None, 'message': 'Transaction was initiated', 'workflow_step_id': None, 'id': 337, 'status_url': None, 'dim_date_created_id': '20200528', 'dim_ip_city_id': None, 'dim_merchant_time_created_id': '1061849', 'dim_time_modified_id': '1061849', 'customer_id': u'666123456', 'type': 'ECOM', 'dim_time_created_id': '1061849', 'kyc_message': None, 'description': 'Transfer to XXXXXXXXXXXX, id YYYYYYYYYY', 'status_id': 3, 'original_txn_id': None, 'dim_merchant_date_modified_id': '20200528', 'account_details_id': 525252525252, 'merchant_id': 666, 'dim_merchant_time_modified_id': '1061849', 'dim_merchant_date_created_id': '20200528', 'product_id': 6661, 'dim_ip_country_id': None, 'invoice_id': None, 'workflow_description': None, 'e_customer_id': 46642, 'amount': 55.66, 'country': 'KZ', 'operation_id': 2, 'dim_date_modified_id': '20200528', 'workflow_version': None}
-DEBUG:main:Rows updated : 1
-DEBUG:main:Rows updated : 1
-INFO:werkzeug:192.168.52.1 - - [28/May/2020 06:18:49] "GET /dbstress/api/v1.0/transactions HTTP/1.1" 200 -
-^C./run.sh: line 8: eof: command not found
-acano@db01-dev:~/dbstress-service$ ./run.sh 
-http://192.168.52.52:3333/dbstress/api/v1.0/transactions
- * Serving Flask app "main" (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: off
-INFO:werkzeug: * Running on http://192.168.52.52:3333/ (Press CTRL+C to quit)
-DEBUG:main:ramdom() merchant_id  : 1000 
-DEBUG:main:ramdom() v_payfrex_customer_id: 10002143tyhmnj 
-DEBUG:main:ramdom() merchant_id  : 1000 
-DEBUG:main:ramdom() e_customer_id: 578920 
-DEBUG:main:ramdom() paysol_id: 7600 
-DEBUG:main:TXN: 338 .... CACHED
-DEBUG:main:Rows updated : 1
-DEBUG:main:Rows updated : 1
-ERROR:main:Exception on /dbstress/api/v1.0/transactions [GET]
-Traceback (most recent call last):
-  File "/home/acano/dbstress-service/venv/local/lib/python2.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/acano/dbstress-service/venv/local/lib/python2.7/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/acano/dbstress-service/venv/local/lib/python2.7/site-packages/flask_restful/__init__.py", line 468, in wrapper
-    resp = resource(*args, **kwargs)
-  File "/home/acano/dbstress-service/venv/local/lib/python2.7/site-packages/flask/views.py", line 89, in view
-    return self.dispatch_request(*args, **kwargs)    
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<payfrex-response operation-size="1">
+  <message>WorkFlow has finished successfully, for transaction Id: 122370798</message>
+  <operations>
+    <operation sorted-order="1">
+      <amount>11400.00</amount>
+      <currency>RUB</currency>
+      <details>"{&amp;quot;status&amp;quot;:&amp;quot;success&amp;quot;,&amp;quot;request_id&amp;quot;:&amp;quot;939edb9ef668aa283a7914bf83569684af336140-5fa2f2954dc1bf10e122b97248b67b875cb30a10-00045975&amp;quot;,&amp;quot;project_id&amp;quot;:677,&amp;quot;payment_id&amp;quot;:&amp;quot;122370798&amp;quot;}
+"</details>
+      <merchantTransactionId>17950342</merchantTransactionId>
+      <message>Transaction is processing</message>
+      <operationType>DEBIT</operationType>
+      <optionalTransactionParams/>
+      <payFrexTransactionId>122370798</payFrexTransactionId>
+      <paySolTransactionId>939edb9ef668aa283a7914bf83569684af336140-5fa2f2954dc1bf10e122b97248b67b875cb30a10-00045975</paySolTransactionId>
+      <paymentDetails>
+        <cardHolderName>DMITRII KHUSNUTDINOV</cardHolderName>
+        <cardNumber>533208****8658</cardNumber>
+        <cardNumberToken>6915774284658658</cardNumberToken>
+        <cardType>MASTERCARD/CREDIT</cardType>
+        <expDate>1021</expDate>
+        <extraDetails>
+          <entry>
+            <key>cardCategory</key>
+            <value>WORLD</value>
+          </entry>
+          <entry>
+            <key>rememberMe</key>
+            <value>true</value>
+          </entry>
+        </extraDetails>
+        <issuerBank>SBERBANK OF RUSSIA</issuerBank>
+        <issuerCountry>RU</issuerCountry>
+      </paymentDetails>
+      <paymentSolution>ecommpay</paymentSolution>
+      <redirectionResponse>redirect:/threeDSecureGeneric.htm?MD=eyJwdXJjaGFzZV9vcGVyYXRpb25faWQiOjQ1OTc0MDAwMDIzMDMxLCJwcm9qZWN0X2lkIjo2NzcsInBheW1lbnRfaWQiOiIxMjIzNzA3OTgiLCJwbHVzX21kIjoiMjg3NDQzNzIxMDUwIn0=&amp;PAReq=eJxVUl1vwjAM%2FCuIF6RJIx8tUJAbxFam8QBjjD1PVepBJ9pCmg7493NYO1ikSL5zcrHPgfEp27W%2B0ZRpkYcd0eWdFua6SNJ8E3be10%2F3QWesYL01iNEb6sqggjmWZbzBVpqEbV4vGQx83xtIwXu8rWA5WeFBQS2sSLcrgTWQFIzexrlVEOvDw2yhep4MvB6wGkKGZhapWntKW3iSA%2FulIY8zVK93KyHoygWALqrcmrPq%2Bx6wBkBldmpr7X7EmMEstUUW264uMgbMpYBdC1lWLipJ6pQmah5NjvU%2Bv0SaL6K5N%2F%2BaHhfrSQjMnYAktqgkl5z7ctjiwcjnI78P7MJDnLkalBA%2B511OpdcE7N07k5usS96SQCYbmkHTS4MAT%2FsiRzpBTv7FkGCpVYKfcbWzH9RaRiwV4Vhg16Yen53X2pJ9wyENaigHvnB%2BXyinnZJhUgh%2BEXcAmLvE6lGyeuoU%2FfsNP28ouVE%3D&amp;TermUrl=https%3A%2F%2Fcheckout.prd-eu-west3.epgint.com%2FEPGCheckout%2Frest%2Fonline%2FthreeDSecure%3Fmethod%3DEcommpay%26transactionId%3D122370798&amp;AcsUrl=https://ds1.mirconnect.ru:443/sc/pareq</redirectionResponse>
+      <status>REDIRECTED</status>
+    </operation>
+        <operation sorted-order="1">
+      <amount>11400.00</amount>
+      <currency>RUB</currency>
+      <details>"{&amp;quot;status&amp;quot;:&amp;quot;success&amp;quot;,&amp;quot;request_id&amp;quot;:&amp;quot;939edb9ef668aa283a7914bf83569684af336140-5fa2f2954dc1bf10e122b97248b67b875cb30a10-00045975&amp;quot;,&amp;quot;project_id&amp;quot;:677,&amp;quot;payment_id&amp;quot;:&amp;quot;122370798&amp;quot;}
+"</details>
+      <merchantTransactionId>17950342</merchantTransactionId>
+      <message>Transaction is processing</message>
+      <operationType>DEBIT</operationType>
+      <optionalTransactionParams/>
+      <payFrexTransactionId>122370798</payFrexTransactionId>
+      <paySolTransactionId>939edb9ef668aa283a7914bf83569684af336140-5fa2f2954dc1bf10e122b97248b67b875cb30a10-00045975</paySolTransactionId>
+      <paymentDetails>
+        <cardHolderName>DMITRII KHUSNUTDINOV</cardHolderName>
+        <cardNumber>533208****8658</cardNumber>
+        <cardNumberToken>6915774284658658</cardNumberToken>
+        <cardType>MASTERCARD/CREDIT</cardType>
+        <expDate>1021</expDate>
+        <extraDetails>
+          <entry>
+            <key>cardCategory</key>
+            <value>WORLD</value>
+          </entry>
+          <entry>
+            <key>rememberMe</key>
+            <value>true</value>
+          </entry>
+        </extraDetails>
+        <issuerBank>SBERBANK OF RUSSIA</issuerBank>
+        <issuerCountry>RU</issuerCountry>
+      </paymentDetails>
+      <paymentSolution>ecommpay</paymentSolution>
+      <redirectionResponse>redirect:/threeDSecureGeneric.htm?MD=eyJwdXJjaGFzZV9vcGVyYXRpb25faWQiOjQ1OTc0MDAwMDIzMDMxLCJwcm9qZWN0X2lkIjo2NzcsInBheW1lbnRfaWQiOiIxMjIzNzA3OTgiLCJwbHVzX21kIjoiMjg3NDQzNzIxMDUwIn0=&amp;PAReq=eJxVUl1vwjAM%2FCuIF6RJIx8tUJAbxFam8QBjjD1PVepBJ9pCmg7493NYO1ikSL5zcrHPgfEp27W%2B0ZRpkYcd0eWdFua6SNJ8E3be10%2F3QWesYL01iNEb6sqggjmWZbzBVpqEbV4vGQx83xtIwXu8rWA5WeFBQS2sSLcrgTWQFIzexrlVEOvDw2yhep4MvB6wGkKGZhapWntKW3iSA%2FulIY8zVK93KyHoygWALqrcmrPq%2Bx6wBkBldmpr7X7EmMEstUUW264uMgbMpYBdC1lWLipJ6pQmah5NjvU%2Bv0SaL6K5N%2F%2BaHhfrSQjMnYAktqgkl5z7ctjiwcjnI78P7MJDnLkalBA%2B511OpdcE7N07k5usS96SQCYbmkHTS4MAT%2FsiRzpBTv7FkGCpVYKfcbWzH9RaRiwV4Vhg16Yen53X2pJ9wyENaigHvnB%2BXyinnZJhUgh%2BEXcAmLvE6lGyeuoU%2FfsNP28ouVE%3D&amp;TermUrl=https%3A%2F%2Fcheckout.prd-eu-west3.epgint.com%2FEPGCheckout%2Frest%2Fonline%2FthreeDSecure%3Fmethod%3DEcommpay%26transactionId%3D122370798&amp;AcsUrl=https://ds1.mirconnect.ru:443/sc/pareq</redirectionResponse>
+      <status>REDIRECTED</status>
+    </operation>
+    <operation sorted-order="1">
+      <amount>11400.00</amount>
+      <currency>RUB</currency>
+      <details>"{&amp;quot;status&amp;quot;:&amp;quot;success&amp;quot;,&amp;quot;request_id&amp;quot;:&amp;quot;939edb9ef668aa283a7914bf83569684af336140-5fa2f2954dc1bf10e122b97248b67b875cb30a10-00045975&amp;quot;,&amp;quot;project_id&amp;quot;:677,&amp;quot;payment_id&amp;quot;:&amp;quot;122370798&amp;quot;}
+"</details>
+      <merchantTransactionId>17950342</merchantTransactionId>
+      <message>Transaction is processing</message>
+      <operationType>DEBIT</operationType>
+      <optionalTransactionParams/>
+      <payFrexTransactionId>122370798</payFrexTransactionId>
+      <paySolTransactionId>939edb9ef668aa283a7914bf83569684af336140-5fa2f2954dc1bf10e122b97248b67b875cb30a10-00045975</paySolTransactionId>
+      <paymentDetails>
+        <cardHolderName>DMITRII KHUSNUTDINOV</cardHolderName>
+        <cardNumber>533208****8658</cardNumber>
+        <cardNumberToken>6915774284658658</cardNumberToken>
+        <cardType>MASTERCARD/CREDIT</cardType>
+        <expDate>1021</expDate>
+        <extraDetails>
+          <entry>
+            <key>cardCategory</key>
+            <value>WORLD</value>
+          </entry>
+          <entry>
+            <key>rememberMe</key>
+            <value>true</value>
+          </entry>
+        </extraDetails>
+        <issuerBank>SBERBANK OF RUSSIA</issuerBank>
+        <issuerCountry>RU</issuerCountry>
+      </paymentDetails>
+      <paymentSolution>ecommpay</paymentSolution>
+      <redirectionResponse>redirect:/threeDSecureGeneric.htm?MD=eyJwdXJjaGFzZV9vcGVyYXRpb25faWQiOjQ1OTc0MDAwMDIzMDMxLCJwcm9qZWN0X2lkIjo2NzcsInBheW1lbnRfaWQiOiIxMjIzNzA3OTgiLCJwbHVzX21kIjoiMjg3NDQzNzIxMDUwIn0=&amp;PAReq=eJxVUl1vwjAM%2FCuIF6RJIx8tUJAbxFam8QBjjD1PVepBJ9pCmg7493NYO1ikSL5zcrHPgfEp27W%2B0ZRpkYcd0eWdFua6SNJ8E3be10%2F3QWesYL01iNEb6sqggjmWZbzBVpqEbV4vGQx83xtIwXu8rWA5WeFBQS2sSLcrgTWQFIzexrlVEOvDw2yhep4MvB6wGkKGZhapWntKW3iSA%2FulIY8zVK93KyHoygWALqrcmrPq%2Bx6wBkBldmpr7X7EmMEstUUW264uMgbMpYBdC1lWLipJ6pQmah5NjvU%2Bv0SaL6K5N%2F%2BaHhfrSQjMnYAktqgkl5z7ctjiwcjnI78P7MJDnLkalBA%2B511OpdcE7N07k5usS96SQCYbmkHTS4MAT%2FsiRzpBTv7FkGCpVYKfcbWzH9RaRiwV4Vhg16Yen53X2pJ9wyENaigHvnB%2BXyinnZJhUgh%2BEXcAmLvE6lGyeuoU%2FfsNP28ouVE%3D&amp;TermUrl=https%3A%2F%2Fcheckout.prd-eu-west3.epgint.com%2FEPGCheckout%2Frest%2Fonline%2FthreeDSecure%3Fmethod%3DEcommpay%26transactionId%3D122370798&amp;AcsUrl=https://ds1.mirconnect.ru:443/sc/pareq</redirectionResponse>
+      <status>REDIRECTED</status>
+    </operation>
+  </operations>
+  <status>SUCCESS</status>
+  <workFlowResponse>
+    <id>12523</id>
+    <name>Ecommpay deposit</name>
+    <version>2</version>
+  </workFlowResponse>
+</payfrex-response>

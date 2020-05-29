@@ -294,3 +294,29 @@ def update_t_transaction(txnid):
          cursor.close()
          conn.close()
        
+def select_t_transaction_62(transaction_id):
+        
+       
+       db = MySQLPool(app)
+       try:
+          conn = db.connection.get_connection()
+          cursor = conn.cursor(dictionary=True)
+
+          sql=" SELECT"\
+              " json_unquote( ext.details ->'$.paymentRecurringType') as PAYMENT_RECURRING_TYPE,"\
+              " JSON_UNQUOTE(ext.details->'$.threedType') as THREED_TYPE,"\
+              " JSON_UNQUOTE(ext.details->'$.urlDomain' ) as url_domain,t.*,ext.*"\
+              " FROM t_transactions t LEFT JOIN t_transaction_extended ext ON ext.txn_id = t.id"\
+              " WHERE t.id = %s"
+              
+          data=(transaction_id,)                
+          cursor.execute(sql,data)  
+          result = cursor.fetchall()
+          c =  [dict(row) for row in result]
+          return c
+       except mysql.connector.Error as err:
+          app.logger.error(format(err))
+          app.logger.debug(cursor.statement)
+       finally:
+          cursor.close()
+          conn.close()

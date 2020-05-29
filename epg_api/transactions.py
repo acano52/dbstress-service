@@ -187,6 +187,7 @@ class transactions(Resource):
                     dic_txn['dim_time_modified_id']           = get_random_time() 
                     dic_txn['dim_merchant_date_modified_id']  = get_random_date() 
                     dic_txn['dim_merchant_time_modified_id']  = get_random_time() 
+                    dic_txn['status_id']  = 12
                     dic_txn['message']= "Transaction is processing"
                     app.logger.debug("STEP 24")
                     appcache.set(str(txnid),dic_txn)
@@ -196,7 +197,96 @@ class transactions(Resource):
                     app.logger.debug("STEP 25")
                     insert_e_merchant_call(txnid)
 
+                    #62
+                    app.logger.debug("STEP 26")
+                    a=select_t_transaction_62(str(txnid))
+
+                    #65
+                    app.logger.debug("STEP 27")
+                    insert_e_merchant_call(txnid)
+
+                    #74
+                    app.logger.debug("STEP 28")
+                    insert_t_transaction_payment_details(txnid,4)
+
+                    #77
+                    appcache=Cache(app)
+                    dic_txn = appcache.get(str(txnid))
+                    dic_txn['dim_date_modified_id']           = get_random_date()
+                    dic_txn['dim_time_modified_id']           = get_random_time() 
+                    dic_txn['dim_merchant_date_modified_id']  = get_random_date() 
+                    dic_txn['dim_merchant_time_modified_id']  = get_random_time() 
+                    dic_txn['status_id']  = 13
+                    app.logger.debug("STEP 29")
+                    appcache.set(str(txnid),dic_txn)
+                    update_t_transaction(txnid)
+
+                    #80
+                    app.logger.debug("STEP 30")
+                    insert_t_transaction_payment_details(txnid,4)
+                    
+                    #81
+                    appcache=Cache(app)
+                    dic_txn = appcache.get(str(txnid))
+                    dic_txn['dim_date_modified_id']           = get_random_date()
+                    dic_txn['dim_time_modified_id']           = get_random_time() 
+                    dic_txn['dim_merchant_date_modified_id']  = get_random_date() 
+                    dic_txn['dim_merchant_time_modified_id']  = get_random_time() 
+                    dic_txn['message']  = "Successful payment using Ecommpay."
+                    app.logger.debug("STEP 31")
+                    appcache.set(str(txnid),dic_txn)
+                    update_t_transaction(txnid)
+
+                    appcache=Cache(app)
+                    dic_txn = appcache.get(str(txnid))
+                    dic_txn['dim_date_modified_id']           = get_random_date()
+                    dic_txn['dim_time_modified_id']           = get_random_time() 
+                    dic_txn['dim_merchant_date_modified_id']  = get_random_date() 
+                    dic_txn['dim_merchant_time_modified_id']  = get_random_time() 
+                    dic_txn['message']  = "Successful payment using Ecommpay."
+                    dic_txn['status_id']  = 3
+                    app.logger.debug("STEP 32")
+                    appcache.set(str(txnid),dic_txn)
+                    update_t_transaction(txnid)
+
+
+                    #82
+                    app.logger.debug("STEP 33")
+                    insert_e_merchant_call(txnid)
+
+                    #88
+                    app.logger.debug("STEP 34")
+                    insert_t_transaction_request(txnid)
+
+                    #89
+                    appcache=Cache(app)
+                    dic_txn = appcache.get(str(txnid))
+                    dic_txn['dim_date_modified_id']           = get_random_date()
+                    dic_txn['dim_time_modified_id']           = get_random_time() 
+                    dic_txn['dim_merchant_date_modified_id']  = get_random_date() 
+                    dic_txn['dim_merchant_time_modified_id']  = get_random_time() 
+                    dic_txn['message']  = "Successful payment using Ecommpay.."
+                    dic_txn['status_id']  = 3
+                    app.logger.debug("STEP 35")
+                    appcache.set(str(txnid),dic_txn)
+                    update_t_transaction(txnid)
+
+                    #92
+                    app.logger.debug("STEP 36")
+                    insert_e_merchant_call(txnid)
+                    
+                    #92
+                    app.logger.debug("STEP 37")
+                    insert_e_merchant_call(txnid)
+
+                    #92
+                    app.logger.debug("STEP 38")
+                    insert_e_merchant_call(txnid)
+
+
+
+
                     #to_json = [cache_merchants]
-                    to_json = txnid
+                    
                               
-               return jsonify(str(to_json)) 
+               return jsonify(txnid) 
