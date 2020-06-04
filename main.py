@@ -31,6 +31,9 @@ from flask import current_app as app
 from epg_utils.configuration import *
 from epg_api.transactions    import transactions
 
+# db_metrics
+from epg_metrics.db_metrics  import *
+
 
 pathname = os.path.abspath(os.path.dirname(sys.argv[0]))
 ACTIVATE_SCRIPT = pathname + '/venv/bin/activate_this.py'
@@ -46,7 +49,7 @@ app = Flask(__name__)
 app.config['CACHE_TYPE'] = 'filesystem'
 app.config['CACHE_DIR'] = '/tmp/cache'
 #app.config['CACHE_DEFAULT_TIMEOUT'] = 922337203685477580
-app.config['CACHE_DEFAULT_TIMEOUT'] = 300
+app.config['CACHE_DEFAULT_TIMEOUT'] = 3600
 app.config['CACHE_THRESHOLD'] = 922337203685477580
 
 # db
@@ -84,12 +87,15 @@ app.logger.addHandler(handler)
 db       =   MySQLPool(app)
 api      =   Api(app)
 appcache =   Cache(app)
+with app.app_context():
+     create_db_metrics()
 
 if __name__ == "__main__":
    
    print("http://192.168.52.52:3333/dbstress/api/v1.0/transactions")
    api.add_resource(transactions, '/dbstress/api/v1.0/transactions', endpoint = 'dbstress')
-   app.run(host='192.168.52.52', port='3333')   
+   app.run(host='192.168.52.52', port='3333' , threaded = True)   
+
    
 
    

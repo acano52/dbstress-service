@@ -1,4 +1,4 @@
-from flask import Flask,abort,jsonify
+from flask import Flask,abort,jsonify,request
 from flask_restful import Api, Resource, reqparse
 import mysql.connector
 from flask_mysqlpool import MySQLPool
@@ -17,19 +17,55 @@ from epg_db.t_transaction_request import *
 from epg_db.t_transaction_payment_details import *
 from epg_db.e_merchant_call import *
 from epg_db.e_customer     import *
+from epg_metrics.db_metrics  import *
+
 from time import sleep
+from timeit import default_timer as timer
 
 
 
 class transactions(Resource):
 
-       
            def get(self):
                with app.app_context():
+                    parser = reqparse.RequestParser()
+                    parser.add_argument('metrics_level', type=int , default=-1)
+                    parser.add_argument('num', type=int , default=1)
+                    args = parser.parse_args()
+                    
+                    metrics_level=args.get('metrics_level')
+                    num=args.get('num')
 
-                    # Select ramdom merchant and client for txn
+                    if metrics_level not in [-1,0,1]:
+                       return "Invalid <metrics_level> argument, it must be [0,1]", 400    
 
+                    if num > 100 :
+                       return "Invalid <num> argument, it must be between 1 and 100", 400    
+                                  
+                    for i in range(num):                    
+                       t0 = datetime.now()
+                       txnid=self.new_txn()
+                       t1 = datetime.now()
+                       db_metric_0(txnid,t0,t1,metrics_level)
 
+                              
+               return jsonify(txnid)            
+           
+
+          # def get(self):
+          #     with app.app_context():
+          #          num = request.args.get('num')
+          #
+          #          for i in range(int(num)):
+          #              # Select ramdom merchant and client for txn
+          #             t0 = datetime.now()
+          #             txnid=self.new_txn()
+          #             t1 = datetime.now()
+          #             db_metric_0(txnid,t0,t1)
+          #          
+          #     return jsonify(txnid)       
+
+           def new_txn(self):
 
                     cache_general    = get_cache_general()
                     cache_merchants  = get_cache_merchants()
@@ -282,11 +318,7 @@ class transactions(Resource):
                     #92
                     app.logger.debug("STEP 38")
                     insert_e_merchant_call(txnid)
+                    return txnid
 
 
-
-
-                    #to_json = [cache_merchants]
                     
-                              
-               return jsonify(txnid) 

@@ -5,4 +5,4 @@ export dir=`pwd`
 source     $dir/venv/bin/activate
 python $dir/main.py
 deactivate
-eof
+#eof

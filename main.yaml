@@ -15,4 +15,4 @@ database:
 
 logging:
         LOGFILE: /tmp/dbstress-service.log
-        LEVEL:   DEBUG
+        LEVEL:   INFO
